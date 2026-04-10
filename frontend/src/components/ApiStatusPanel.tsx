@@ -121,6 +121,24 @@ export function ApiStatusPanel() {
                 <code>{meta.data.apiPrefix}</code>
               </dd>
             </div>
+            {meta.data.mvpReservationDecision && (
+              <>
+                <div>
+                  <dt>Decisión MVP reservas</dt>
+                  <dd>
+                    <strong>{meta.data.mvpReservationDecision.choice}</strong>
+                    {": "}
+                    {meta.data.mvpReservationDecision.label}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Acta (repo)</dt>
+                  <dd>
+                    <code>{meta.data.mvpReservationDecision.actaRelativePath}</code>
+                  </dd>
+                </div>
+              </>
+            )}
           </dl>
           <h4 className="card__sub">Notas de seguridad / PII</h4>
           <ul className="card__list">
