@@ -57,6 +57,12 @@
   padding-left: 1.2rem;
 }
 
+.panel__errors--single {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 0;
+}
+
 .panel__hint {
   margin: 0.75rem 0 0;
   font-size: 0.88rem;
@@ -140,4 +146,71 @@
 
 .card__list li {
   margin-bottom: 0.35rem;
+}
+
+.card__lead {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.card__para {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.card__field-group-title {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.card__field-list {
+  margin: 0 0 0.25rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.card__field-list li {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.25rem 0.75rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.card__field-list li:last-child {
+  border-bottom: none;
+}
+
+.card__field-id {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.card__field-label {
+  grid-column: 2;
+  font-weight: 500;
+}
+
+.card__field-format {
+  grid-column: 1 / -1;
+  font-size: 0.88em;
+  color: var(--muted);
+}
+
+@media (max-width: 480px) {
+  .card__field-list li {
+    grid-template-columns: 1fr;
+  }
+
+  .card__field-label {
+    grid-column: 1;
+  }
 }

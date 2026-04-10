@@ -7,8 +7,8 @@ export function App() {
       <header className="app__header">
         <h1 className="app__title">Ficha Cliente</h1>
         <p className="app__subtitle">
-          Punto de entrada del front: estado del BFF y metadatos de stack (tarea
-          1 — confirmación operativa).
+          Punto de entrada: estado del BFF, documento de alcance MVP de reservas
+          (<code>/v1/meta/mvp-scope</code>) y metadatos de stack.
         </p>
       </header>
       <main className="app__main" aria-labelledby="api-status-heading">
