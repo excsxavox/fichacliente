@@ -122,22 +122,27 @@ export function ApiStatusPanel() {
               </dd>
             </div>
             {meta.data.mvpReservationDecision && (
-              <>
-                <div>
-                  <dt>Decisión MVP reservas</dt>
-                  <dd>
-                    <strong>{meta.data.mvpReservationDecision.choice}</strong>
-                    {": "}
+              <div className="card__decision">
+                <dt>Decisión MVP reservas</dt>
+                <dd>
+                  <p className="card__decision-badge">
+                    <span className="visually-hidden">Opción elegida: </span>
+                    <span
+                      className="card__choice"
+                      aria-label={`Opción ${meta.data.mvpReservationDecision.choice}`}
+                    >
+                      {meta.data.mvpReservationDecision.choice}
+                    </span>
+                  </p>
+                  <p className="card__decision-text">
                     {meta.data.mvpReservationDecision.label}
-                  </dd>
-                </div>
-                <div>
-                  <dt>Acta (repo)</dt>
-                  <dd>
+                  </p>
+                  <p className="card__decision-acta">
+                    Acta en repositorio:{" "}
                     <code>{meta.data.mvpReservationDecision.actaRelativePath}</code>
-                  </dd>
-                </div>
-              </>
+                  </p>
+                </dd>
+              </div>
             )}
           </dl>
           <h4 className="card__sub">Notas de seguridad / PII</h4>

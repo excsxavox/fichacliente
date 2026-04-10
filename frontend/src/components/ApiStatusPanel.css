@@ -112,6 +112,52 @@
   align-items: baseline;
 }
 
+.card__dl > div.card__decision {
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.card__decision-badge {
+  margin: 0 0 0.35rem;
+}
+
+.card__choice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  min-height: 1.75rem;
+  padding: 0 0.4rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  border: 1px solid var(--border);
+}
+
+.card__decision-text {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.card__decision-acta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.card__decision-acta code {
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
 @media (max-width: 480px) {
   .card__dl > div {
     grid-template-columns: 1fr;

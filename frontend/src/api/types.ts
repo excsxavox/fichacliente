@@ -4,7 +4,7 @@ export type HealthResponse = {
   environment: string;
 };
 
-export type MvpReservationDecisionMeta = {
+export type MvpReservationDecision = {
   choice: "A" | "B" | "C";
   label: string;
   actaRelativePath: string;
@@ -16,6 +16,6 @@ export type StackMetaResponse = {
   language: string;
   framework: string;
   apiPrefix: string;
-  mvpReservationDecision?: MvpReservationDecisionMeta;
+  mvpReservationDecision?: MvpReservationDecision;
   notes: string[];
 };
