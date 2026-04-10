@@ -23,6 +23,8 @@ app.get("/health", async () => ({
   environment: env.NODE_ENV,
 }));
 
+app.get("/v1/meta/mvp-scope", async () => buildMvpScopeSnapshot());
+
 app.get("/v1/meta/stack", async () => ({
   repository: "github.com/excsxavox/fichacliente",
   runtime: `node ${process.version}`,
@@ -31,12 +33,12 @@ app.get("/v1/meta/stack", async () => ({
   apiPrefix: "/v1",
   notes: [
     "MVP web de reservas (cadena de hoteles): alcance explícito, disponibilidad simulada y campos mínimos del huésped en GET /v1/meta/mvp-scope.",
+    "BFF orientado a Ficha Cliente (H2-FC); contratos REST bajo /v1 en iteraciones posteriores.",
     "PII: enmascaramiento en salida y redacción en logs — ver src/security/.",
+    "Documentos: exponer solo URLs firmadas de corta duración hacia el cliente.",
     "Auth en rutas públicas del MVP: ninguna por defecto; API keys/JWT pueden añadirse en fases posteriores.",
   ],
 }));
-
-app.get("/v1/meta/mvp-scope", async () => buildMvpScopeSnapshot());
 
 app.setErrorHandler((err: unknown, req, reply) => {
   const e = err instanceof Error ? err : new Error(String(err));
