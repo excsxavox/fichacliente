@@ -3,16 +3,6 @@
  * No sustituye cifrado en reposo ni control de acceso — solo reduce exposición en superficies de salida.
  */
 
-const VISIBLE_LAST = 4;
-
-export function maskBankAccountLast4(value: string | null | undefined): string | null {
-  if (value == null || value === "") return value ?? null;
-  const digits = value.replace(/\D/g, "");
-  if (digits.length <= VISIBLE_LAST) return "****";
-  const masked = "*".repeat(Math.max(0, digits.length - VISIBLE_LAST));
-  return `${masked}${digits.slice(-VISIBLE_LAST)}`;
-}
-
 export function redactEmailForLog(email: string | null | undefined): string {
   if (!email) return "";
   const [local, domain] = email.split("@");

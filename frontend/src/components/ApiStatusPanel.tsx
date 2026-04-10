@@ -19,7 +19,7 @@ export function ApiStatusPanel() {
   const health = useAsyncResource(healthLoad);
   const meta = useAsyncResource(metaLoad);
 
-  const bothLoading = health.status === "loading" || meta.status === "loading";
+  const anyLoading = health.status === "loading" || meta.status === "loading";
   const anyError = health.status === "error" || meta.status === "error";
 
   const errorMessages = useMemo(() => {
@@ -30,7 +30,7 @@ export function ApiStatusPanel() {
   }, [health, meta]);
 
   return (
-    <section className="panel" aria-busy={bothLoading}>
+    <section className="panel" aria-busy={anyLoading}>
       <div className="panel__toolbar">
         <p className="panel__intro" id="panel-desc">
           Comprueba la conectividad con el BFF y revisa las notas de política de
@@ -43,20 +43,20 @@ export function ApiStatusPanel() {
             health.reload();
             meta.reload();
           }}
-          disabled={bothLoading}
+          disabled={anyLoading}
           aria-describedby="panel-desc"
         >
-          {bothLoading ? "Actualizando…" : "Volver a cargar"}
+          {anyLoading ? "Actualizando…" : "Volver a cargar"}
         </button>
       </div>
 
-      {bothLoading && (
+      {anyLoading && (
         <p className="panel__state" role="status">
           Cargando estado del servicio…
         </p>
       )}
 
-      {anyError && !bothLoading && (
+      {anyError && !anyLoading && (
         <div className="panel__alert" role="alert">
           <strong>No se pudo completar la consulta.</strong>
           <ul className="panel__errors">
@@ -71,7 +71,7 @@ export function ApiStatusPanel() {
         </div>
       )}
 
-      {!bothLoading && health.status === "success" && (
+      {!anyLoading && health.status === "success" && (
         <article className="card" aria-labelledby="health-heading">
           <h3 id="health-heading" className="card__title">
             Salud del servicio
@@ -93,7 +93,7 @@ export function ApiStatusPanel() {
         </article>
       )}
 
-      {!bothLoading && meta.status === "success" && (
+      {!anyLoading && meta.status === "success" && (
         <article className="card" aria-labelledby="meta-heading">
           <h3 id="meta-heading" className="card__title">
             Stack y políticas (API)
@@ -131,7 +131,7 @@ export function ApiStatusPanel() {
         </article>
       )}
 
-      {!bothLoading &&
+      {!anyLoading &&
         health.status === "success" &&
         meta.status === "success" && (
           <p className="panel__empty-note" role="note">
