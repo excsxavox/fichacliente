@@ -1,4 +1,4 @@
-Fichacliente — monorepo (workspaces)
+Ficha Cliente — monorepo (BFF + SPA)
 
 Requisitos: Node.js 20+
 
@@ -17,7 +17,8 @@ Solo front:
 Compilar:
   npm run build
 
-Producción (sirve solo el BFF; el front se despliega como estáticos de frontend/dist):
-  npm run start
+Producción: el BFF se ejecuta con npm run start; el front se publica como estáticos (frontend/dist).
 
 Variables: ver server/.env.example y frontend/.env.example
+
+Stack API: TypeScript, Fastify 5, Zod. PII: src/security en el workspace server.
