@@ -4,6 +4,12 @@
 **Repositorio:** monorepo actual (`frontend` + `server`, Node.js + TypeScript).  
 **Alcance del acta:** elegir entre **A** evolucionar este repo al MVP de reservas, **B** entregar otro repositorio, o **C** convivencia de dominios con **namespacing** claro bajo `/v1`.
 
+| Opción | Descripción breve |
+|--------|-------------------|
+| **A** | Este repositorio pivota hacia el MVP de reservas como foco principal de producto. |
+| **B** | MVP de reservas en otro repositorio; este repo se centra solo en Ficha Cliente. |
+| **C** | Mismo monorepo: Ficha Cliente y MVP de reservas conviven; API del MVP bajo **`/v1`** con módulos y rutas de UI separados. |
+
 ---
 
 ## Decisión adoptada: **C** (convivencia con namespacing bajo `/v1`)

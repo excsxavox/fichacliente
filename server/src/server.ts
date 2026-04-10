@@ -29,14 +29,14 @@ app.get("/v1/meta/stack", async () => ({
   framework: "Fastify 5",
   apiPrefix: "/v1",
   mvpReservationDecision: {
-    choice: "C",
+    choice: "C" as const,
     label:
-      "Convivencia en este monorepo: MVP reservas y Ficha Cliente con namespacing claro bajo /v1",
+      "Convivencia en este monorepo: MVP reservas y Ficha Cliente con namespacing claro bajo /v1; rutas y módulos dedicados y UI separada.",
     actaRelativePath: "docs/acta-decision-mvp-reservas.md",
   },
   notes: [
-    "BFF orientado a Ficha Cliente (H2-FC); contratos REST bajo /v1 en iteraciones posteriores.",
-    "MVP reservas (hoteles): mismo repo y prefijo /v1; rutas y módulos dedicados — ver acta en docs/acta-decision-mvp-reservas.md.",
+    "Decisión MVP reservas (acta): opción C — convivencia con namespacing /v1; ver mvpReservationDecision y docs/acta-decision-mvp-reservas.md.",
+    "BFF orientado a Ficha Cliente (H2-FC); contratos REST del MVP bajo /v1 con rutas y módulos dedicados.",
     "PII: enmascaramiento en salida (p. ej. cuenta bancaria) y redacción en logs — ver src/security/.",
     "Documentos: exponer solo URLs firmadas de corta duración hacia el cliente.",
     "Auth: JWT (o gateway) pendiente de aplicar en rutas protegidas.",
