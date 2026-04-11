@@ -30,7 +30,7 @@ export type ProductRoutingPolicy = {
 
 export const PRODUCT_ROUTING_POLICY: ProductRoutingPolicy = {
   version: "1.0",
-  updated: "2026-04-11",
+  updated: "2026-04-11T00:00:00.000Z",
   api: {
     restPrefix: "/v1",
     hotels: {
