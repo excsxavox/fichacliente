@@ -1,4 +1,5 @@
 import { ApiStatusPanel } from "./components/ApiStatusPanel";
+import { HotelStateMatrixPanel } from "./components/HotelStateMatrixPanel";
 import "./App.css";
 
 export function App() {
@@ -7,15 +8,18 @@ export function App() {
       <header className="app__header">
         <h1 className="app__title">Ficha Cliente</h1>
         <p className="app__subtitle">
-          Punto de entrada del front: estado del BFF y metadatos de stack (tarea
-          1 — confirmación operativa).
+          MVP gestión hotelera: conectividad con la API y matriz de estados de
+          habitación y reserva (dominio expuesto en <code>/v1</code>).
         </p>
       </header>
-      <main className="app__main" aria-labelledby="api-status-heading">
-        <h2 id="api-status-heading" className="visually-hidden">
-          Estado de la API
-        </h2>
-        <ApiStatusPanel />
+      <main className="app__main">
+        <section aria-labelledby="api-status-heading">
+          <h2 id="api-status-heading" className="visually-hidden">
+            Estado de la API
+          </h2>
+          <ApiStatusPanel />
+        </section>
+        <HotelStateMatrixPanel />
       </main>
     </div>
   );
