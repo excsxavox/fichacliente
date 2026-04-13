@@ -13,6 +13,19 @@ export type StackMetaResponse = {
   notes: string[];
 };
 
+/** GET /v1/meta/persistence — motor efectivo y política MVP (sin credenciales). */
+export type PersistenceMetaResponse = {
+  engine: "sqlite" | "postgres";
+  databaseUrlSummary: string;
+  rationale: string[];
+  concurrencyMvp: string;
+  migrationPathToPostgres: string;
+  configuration: {
+    databaseUrlVar: string;
+    description: string;
+  };
+};
+
 export type HotelStateTransition = {
   from: string;
   to: string;
