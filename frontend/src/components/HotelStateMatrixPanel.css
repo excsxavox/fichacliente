@@ -1,0 +1,169 @@
+.state-matrix {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+}
+
+.state-matrix__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.state-matrix__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.state-matrix__intro {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.state-matrix__reload {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.state-matrix__reload:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.state-matrix__status {
+  margin: 0;
+  color: var(--muted);
+}
+
+.state-matrix__alert {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #f5c2c0;
+  background: #fef3f2;
+  color: var(--danger);
+}
+
+.state-matrix__error-detail {
+  margin: 0.5rem 0 0;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+
+.state-matrix__hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.state-matrix__hint code {
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.state-matrix__version {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.state-matrix__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+
+.state-matrix__card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--bg);
+}
+
+.state-matrix__card-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.02rem;
+}
+
+.state-matrix__sub {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.state-matrix__sub:first-of-type {
+  margin-top: 0;
+}
+
+.state-matrix__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.state-matrix__chip {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.state-matrix__chip--terminal {
+  border-color: #c4c9d0;
+  background: #eef1f5;
+}
+
+.state-matrix__list {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.9rem;
+}
+
+.state-matrix__list--muted {
+  color: var(--muted);
+}
+
+.state-matrix__list li {
+  margin-bottom: 0.25rem;
+}
+
+.state-matrix__empty {
+  list-style: none;
+  margin-left: -1.15rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.state-matrix__notes {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+.state-matrix__notes li {
+  margin-bottom: 0.35rem;
+}

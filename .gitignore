@@ -1,0 +1,12 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.log
+# SQLite local del MVP (DATABASE_URL=file:./data/...)
+server/data/
+.DS_Store
+coverage/
+.vite/
+*.tsbuildinfo
