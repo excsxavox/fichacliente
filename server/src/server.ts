@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { loadEnv } from "./config/env.js";
+import { getHotelStateMatrixPayload } from "./domain/hotel/index.js";
 import { sanitizeForLogRecord } from "./security/log-sanitize.js";
 
 const env = loadEnv();
@@ -35,6 +36,9 @@ app.get("/v1/meta/stack", async () => ({
     "Auth: JWT (o gateway) pendiente de aplicar en rutas protegidas.",
   ],
 }));
+
+/** Matriz de estados hotel MVP: reserva y habitación (transiciones permitidas/prohibidas). */
+app.get("/v1/hotel/state-matrix", async () => getHotelStateMatrixPayload());
 
 app.setErrorHandler((err: unknown, req, reply) => {
   const e = err instanceof Error ? err : new Error(String(err));
