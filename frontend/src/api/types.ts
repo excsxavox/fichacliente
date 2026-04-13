@@ -61,3 +61,62 @@ export type HotelBusinessRulesResponse = {
   };
   businessErrorCodes: Record<string, string>;
 };
+
+/** GET /v1/demo/hotel-mvp-session — alineado con `HotelMvpDemoSessionPayload` del servidor. */
+export type HotelMvpDemoSessionSeedReservationState =
+  | "pending"
+  | "confirmed"
+  | "checked_in"
+  | "checked_out"
+  | "cancelled"
+  | "no_show";
+
+export type HotelMvpDemoSessionResponse = {
+  id: "hotel-mvp-demo-session-v1";
+  version: 1;
+  locale: "es";
+  referenceDate: string;
+  narrative: string;
+  assumptions: string[];
+  glossary: Record<string, string>;
+  seed: {
+    actorIds: { staff: string; guestAna: string; guestLuis: string };
+    property: {
+      id: string;
+      name: string;
+      timezone: string;
+      addressLine: string;
+    };
+    rooms: Array<{
+      id: string;
+      code: string;
+      capacity: number;
+      floor: number;
+    }>;
+    reservations: Array<{
+      id: string;
+      roomId: string;
+      guestActorId: string;
+      checkInDate: string;
+      checkOutDate: string;
+      state: HotelMvpDemoSessionSeedReservationState;
+    }>;
+  };
+  steps: Array<{
+    step: number;
+    title: string;
+    purpose: string;
+    request: {
+      method: "GET" | "POST" | "PATCH" | "DELETE";
+      path: string;
+      headers?: Record<string, string>;
+      query?: Record<string, string>;
+      body?: unknown;
+    };
+    expected: {
+      status: number;
+      responseSummary: string;
+      errorCodes?: string[];
+    };
+  }>;
+};
