@@ -1,6 +1,13 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { loadEnv } from "./config/env.js";
+import { getHotelMvpDemoSession } from "./demo/hotelMvpDemoSession.js";
+import {
+  getHotelBusinessRulesContract,
+  getHotelStateMatrixPayload,
+} from "./domain/hotel/index.js";
+import { BusinessRuleError } from "./errors/business-rule-error.js";
+import { getPersistenceMeta } from "./persistence/choice.js";
 import { sanitizeForLogRecord } from "./security/log-sanitize.js";
 
 const env = loadEnv();
@@ -36,7 +43,53 @@ app.get("/v1/meta/stack", async () => ({
   ],
 }));
 
+app.get("/v1/meta/persistence", async () => {
+  const meta = getPersistenceMeta(env.persistence.engine);
+  return {
+    engine: meta.engine,
+    databaseUrlSummary: env.persistence.safeSummary,
+    rationale: meta.rationale,
+    concurrencyMvp: meta.concurrencyMvp,
+    migrationPathToPostgres: meta.migrationPathToPostgres,
+    configuration: meta.env,
+  };
+});
+
+/** Matriz de estados hotel MVP: reserva y habitación (transiciones permitidas/prohibidas). */
+app.get("/v1/hotel/state-matrix", async () => getHotelStateMatrixPayload());
+
+/** Contrato de reglas MVP: cancelación, no-show, cambio de habitación y códigos 409. */
+app.get("/v1/meta/hotel-business-rules", async () => getHotelBusinessRulesContract());
+
+/** Casos de demo MVP hotelero (guion + datos seed + pasos HTTP previstos). */
+app.get("/v1/demo/hotel-mvp-session", async (req) => {
+  const actorId = (req.headers["x-actor-id"] as string | undefined)?.trim();
+  req.log.info(
+    sanitizeForLogRecord({
+      demo: "hotel-mvp-session",
+      actorIdPresent: Boolean(actorId),
+    }),
+  );
+  return getHotelMvpDemoSession();
+});
+
 app.setErrorHandler((err: unknown, req, reply) => {
+  if (err instanceof BusinessRuleError) {
+    req.log.warn(
+      sanitizeForLogRecord({
+        businessCode: err.code,
+        path: req.url,
+      }),
+    );
+    void reply.status(409).send({
+      error: {
+        code: err.code,
+        message: err.message,
+      },
+    });
+    return;
+  }
+
   const e = err instanceof Error ? err : new Error(String(err));
   req.log.error(
     sanitizeForLogRecord({
@@ -67,4 +120,11 @@ app.addHook("onSend", async (req, reply) => {
 });
 
 const address = await app.listen({ port: env.PORT, host: "0.0.0.0" });
-app.log.info(`Listening at ${address}`);
+app.log.info(
+  sanitizeForLogRecord({
+    msg: "Server started",
+    address,
+    persistenceEngine: env.persistence.engine,
+    databaseUrlSummary: env.persistence.safeSummary,
+  }),
+);
