@@ -24,7 +24,13 @@ export function useAsyncResource<T>(
         if (cancelled) return;
         let message: string;
         if (err instanceof ApiError) {
-          message = `${err.message} (id de solicitud: ${err.requestId})`;
+          const parts = [
+            err.message,
+            err.code ? `código ${err.code}` : null,
+            `HTTP ${err.status}`,
+            `id de solicitud: ${err.requestId}`,
+          ].filter(Boolean);
+          message = parts.join(" · ");
         } else if (err instanceof Error) {
           message = err.message;
         } else {

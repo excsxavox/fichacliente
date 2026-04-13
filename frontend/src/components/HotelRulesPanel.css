@@ -1,0 +1,262 @@
+.hotel-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+}
+
+.hotel-panel__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.hotel-panel__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.hotel-panel__intro {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.hotel-panel__reload {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.hotel-panel__reload:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hotel-panel__state {
+  margin: 0;
+  color: var(--muted);
+}
+
+.hotel-panel__ref {
+  margin: 0 0 0.75rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.hotel-panel__ref-text {
+  word-break: break-word;
+}
+
+.hotel-panel__alert {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #f5c2c0;
+  background: #fef3f2;
+  color: var(--danger);
+}
+
+.hotel-panel__err-detail {
+  margin: 0.5rem 0 0;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+
+.hotel-panel__hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.hotel-panel__hint code {
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.hotel-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+  background: var(--bg);
+}
+
+.hotel-card:first-of-type {
+  margin-top: 0;
+}
+
+.hotel-card__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.02rem;
+}
+
+.hotel-card__sub {
+  margin: 1rem 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.hotel-card__sub:first-of-type {
+  margin-top: 0;
+}
+
+.hotel-card__purpose {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.hotel-card__muted {
+  margin: 0 0 0.75rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.hotel-card__label {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.hotel-card__dl {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem 1rem;
+}
+
+.hotel-card__dl > div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+@media (max-width: 480px) {
+  .hotel-card__dl > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hotel-card__dl dt {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.hotel-card__dl dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+.hotel-card__list {
+  margin: 0.25rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+}
+
+.hotel-card__list li {
+  margin-bottom: 0.35rem;
+}
+
+.hotel-card__codes {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.hotel-card__codes--inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+.hotel-card__codes--inline li {
+  margin: 0;
+}
+
+.hotel-card__code-map {
+  margin: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.hotel-card__code-map > div {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1fr) 2fr;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hotel-card__code-map > div:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (max-width: 560px) {
+  .hotel-card__code-map > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hotel-card__code-map dt {
+  margin: 0;
+}
+
+.hotel-card__code-map dd {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.hotel-card__chips {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.hotel-chip {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.82rem;
+  font-family: ui-monospace, monospace;
+}
+
+.hotel-card__transitions {
+  margin: 0.25rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.hotel-card__transitions li {
+  margin-bottom: 0.3rem;
+}
+
+.hotel-card__trigger {
+  color: var(--muted);
+  font-size: 0.88em;
+}

@@ -178,6 +178,9 @@ export function getHotelBusinessRulesContract() {
         BusinessErrorCode.RESERVATION_ROOM_CHANGE_NOT_ALLOWED,
         BusinessErrorCode.RESERVATION_ROOM_CHANGE_OVERLAP,
       ],
+      notes: [
+        "La capa de persistencia debe rechazar solapes en la unidad destino con RESERVATION_ROOM_CHANGE_OVERLAP (409).",
+      ],
     },
     businessErrorCodes: BusinessErrorCode,
   } as const;

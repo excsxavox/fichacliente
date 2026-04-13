@@ -26,13 +26,15 @@ export async function fetchJson<T>(
 
   if (!res.ok) {
     let detail = res.statusText;
+    let code: string | undefined;
     try {
-      const body = (await res.json()) as { error?: { message?: string } };
+      const body = (await res.json()) as { error?: { message?: string; code?: string } };
       if (body?.error?.message) detail = body.error.message;
+      if (body?.error?.code) code = body.error.code;
     } catch {
       /* ignore */
     }
-    throw new ApiError(res.status, detail, requestId);
+    throw new ApiError(res.status, detail, requestId, code);
   }
 
   return (await res.json()) as T;
@@ -41,11 +43,19 @@ export async function fetchJson<T>(
 export class ApiError extends Error {
   readonly status: number;
   readonly requestId: string;
+  /** Código de negocio o de plataforma en el cuerpo JSON (p. ej. 409/422). */
+  readonly code: string | undefined;
 
-  constructor(status: number, message: string, requestId: string) {
+  constructor(
+    status: number,
+    message: string,
+    requestId: string,
+    code?: string,
+  ) {
     super(message);
     this.name = "ApiError";
     this.status = status;
     this.requestId = requestId;
+    this.code = code;
   }
 }

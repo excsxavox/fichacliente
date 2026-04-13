@@ -34,3 +34,30 @@ export type HotelStateMatrixResponse = {
   room: HotelStateMatrixEntity;
   reservation: HotelReservationStateMatrix;
 };
+
+/** Contrato GET /v1/meta/hotel-business-rules (sin PII). */
+export type HotelBusinessRulesResponse = {
+  version: number;
+  reservationStatesReference: string;
+  cancellation: {
+    purpose: string;
+    allowedFrom: readonly string[];
+    resultingState: string;
+    httpConflictCodes: readonly string[];
+  };
+  noShow: {
+    purpose: string;
+    allowedFrom: readonly string[];
+    resultingState: string;
+    preconditions: readonly string[];
+    httpConflictCodes: readonly string[];
+  };
+  roomChange: {
+    purpose: string;
+    allowedFrom: readonly string[];
+    persistenceOverlapCode: string;
+    httpConflictCodes: readonly string[];
+    notes?: readonly string[];
+  };
+  businessErrorCodes: Record<string, string>;
+};
