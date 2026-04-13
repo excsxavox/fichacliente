@@ -7,6 +7,7 @@ import {
   getHotelStateMatrixPayload,
 } from "./domain/hotel/index.js";
 import { BusinessRuleError } from "./errors/business-rule-error.js";
+import { getPersistenceMeta } from "./persistence/choice.js";
 import { sanitizeForLogRecord } from "./security/log-sanitize.js";
 
 const env = loadEnv();
@@ -41,6 +42,18 @@ app.get("/v1/meta/stack", async () => ({
     "Auth: JWT (o gateway) pendiente de aplicar en rutas protegidas.",
   ],
 }));
+
+app.get("/v1/meta/persistence", async () => {
+  const meta = getPersistenceMeta(env.persistence.engine);
+  return {
+    engine: meta.engine,
+    databaseUrlSummary: env.persistence.safeSummary,
+    rationale: meta.rationale,
+    concurrencyMvp: meta.concurrencyMvp,
+    migrationPathToPostgres: meta.migrationPathToPostgres,
+    configuration: meta.env,
+  };
+});
 
 /** Matriz de estados hotel MVP: reserva y habitación (transiciones permitidas/prohibidas). */
 app.get("/v1/hotel/state-matrix", async () => getHotelStateMatrixPayload());
@@ -107,4 +120,11 @@ app.addHook("onSend", async (req, reply) => {
 });
 
 const address = await app.listen({ port: env.PORT, host: "0.0.0.0" });
-app.log.info(`Listening at ${address}`);
+app.log.info(
+  sanitizeForLogRecord({
+    msg: "Server started",
+    address,
+    persistenceEngine: env.persistence.engine,
+    databaseUrlSummary: env.persistence.safeSummary,
+  }),
+);
