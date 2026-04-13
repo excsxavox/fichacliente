@@ -29,7 +29,7 @@ app.get("/v1/meta/stack", async () => ({
   framework: "Fastify 5",
   apiPrefix: "/v1",
   notes: [
-    "BFF orientado a Ficha Cliente (H2-FC); contratos REST bajo /v1 en iteraciones posteriores.",
+    "Convivencia H2-FC + MVP hotelero: Ficha Cliente sigue en /v1; el dominio hotelero se expone bajo /v1/hotel/* con módulos/paquetes nombrados hotel para separar PII y casos de uso.",
     "PII: enmascaramiento en salida (p. ej. cuenta bancaria) y redacción en logs — ver src/security/.",
     "Documentos: exponer solo URLs firmadas de corta duración hacia el cliente.",
     "Auth: JWT (o gateway) pendiente de aplicar en rutas protegidas.",
