@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { ApiError } from "../api/client";
 
 export type AsyncState<T> =
   | { status: "idle" }
@@ -22,7 +23,13 @@ export function useAsyncResource<T>(
       .catch((err: unknown) => {
         if (cancelled) return;
         const message =
-          err instanceof Error ? err.message : "Error desconocido de red o API.";
+          err instanceof ApiError
+            ? err.requestId
+              ? `${err.message} (request ${err.requestId})`
+              : err.message
+            : err instanceof Error
+              ? err.message
+              : "Error desconocido de red o API.";
         setState({ status: "error", message });
       });
     return () => {

@@ -33,6 +33,11 @@
   cursor: pointer;
 }
 
+.panel__reload:focus-visible {
+  outline: 2px solid var(--focus, #2563eb);
+  outline-offset: 2px;
+}
+
 .panel__reload:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -55,6 +60,12 @@
 .panel__errors {
   margin: 0.5rem 0 0;
   padding-left: 1.2rem;
+}
+
+.panel__errors--single {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 0;
 }
 
 .panel__hint {
