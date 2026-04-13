@@ -1,14 +1,8 @@
-export type HealthResponse = {
-  status: string;
-  service: string;
-  environment: string;
-};
-
-export type StackMetaResponse = {
-  repository: string;
-  runtime: string;
-  language: string;
-  framework: string;
-  apiPrefix: string;
-  notes: string[];
-};
+/**
+ * @deprecated Preferir tipos y esquemas desde `@fichacliente/api-contracts`.
+ * Se mantienen reexportaciones para código legado hasta completar la migración.
+ */
+export type {
+  HealthResponse,
+  StackMetaResponse,
+} from "@fichacliente/api-contracts";

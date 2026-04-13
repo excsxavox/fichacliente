@@ -1,5 +1,7 @@
 Ficha Cliente — monorepo (BFF + SPA)
 
+Objetivo de la rama (MVP hotelero): incorporar un MVP de gestión hotelera en convivencia explícita con el BFF de Ficha Cliente (H2-FC), colocando el dominio hotelero bajo el prefijo de rutas `/v1/hotel` y namespaces/paquetes `hotel` para no mezclarlo con la Ficha Cliente ni romper el contrato general del BFF en `/v1`.
+
 Requisitos: Node.js 20+
 
 Instalar dependencias:

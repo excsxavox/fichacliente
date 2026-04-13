@@ -1,5 +1,9 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import {
+  parseHealthResponse,
+  parseStackMetaResponse,
+} from "@fichacliente/api-contracts";
 import { loadEnv } from "./config/env.js";
 import { sanitizeForLogRecord } from "./security/log-sanitize.js";
 
@@ -16,25 +20,30 @@ await app.register(cors, {
   origin: true,
 });
 
-app.get("/health", async () => ({
-  status: "ok",
-  service: "fichacliente-bff",
-  environment: env.NODE_ENV,
-}));
+app.get("/health", async () =>
+  parseHealthResponse({
+    status: "ok",
+    service: "fichacliente-bff",
+    environment: env.NODE_ENV,
+  }),
+);
 
-app.get("/v1/meta/stack", async () => ({
-  repository: "github.com/excsxavox/fichacliente",
-  runtime: `node ${process.version}`,
-  language: "TypeScript",
-  framework: "Fastify 5",
-  apiPrefix: "/v1",
-  notes: [
-    "BFF orientado a Ficha Cliente (H2-FC); contratos REST bajo /v1 en iteraciones posteriores.",
-    "PII: enmascaramiento en salida (p. ej. cuenta bancaria) y redacción en logs — ver src/security/.",
-    "Documentos: exponer solo URLs firmadas de corta duración hacia el cliente.",
-    "Auth: JWT (o gateway) pendiente de aplicar en rutas protegidas.",
-  ],
-}));
+app.get("/v1/meta/stack", async () =>
+  parseStackMetaResponse({
+    repository: "github.com/excsxavox/fichacliente",
+    runtime: `node ${process.version}`,
+    language: "TypeScript",
+    framework: "Fastify 5",
+    apiPrefix: "/v1",
+    notes: [
+      "Convivencia H2-FC + MVP hotelero: Ficha Cliente sigue en /v1; el dominio hotelero se expone bajo /v1/hotel/* con módulos/paquetes nombrados hotel para separar PII y casos de uso.",
+      "BFF orientado a Ficha Cliente (H2-FC); contratos REST bajo /v1 en iteraciones posteriores.",
+      "PII: enmascaramiento en salida (p. ej. cuenta bancaria) y redacción en logs — ver src/security/.",
+      "Documentos: exponer solo URLs firmadas de corta duración hacia el cliente.",
+      "Auth: JWT (o gateway) pendiente de aplicar en rutas protegidas.",
+    ],
+  }),
+);
 
 app.setErrorHandler((err: unknown, req, reply) => {
   const e = err instanceof Error ? err : new Error(String(err));
