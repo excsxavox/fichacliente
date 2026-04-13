@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { loadEnv } from "./config/env.js";
+import { getHotelMvpDemoSession } from "./demo/hotelMvpDemoSession.js";
 import {
   getHotelBusinessRulesContract,
   getHotelStateMatrixPayload,
@@ -46,6 +47,18 @@ app.get("/v1/hotel/state-matrix", async () => getHotelStateMatrixPayload());
 
 /** Contrato de reglas MVP: cancelación, no-show, cambio de habitación y códigos 409. */
 app.get("/v1/meta/hotel-business-rules", async () => getHotelBusinessRulesContract());
+
+/** Casos de demo MVP hotelero (guion + datos seed + pasos HTTP previstos). */
+app.get("/v1/demo/hotel-mvp-session", async (req) => {
+  const actorId = (req.headers["x-actor-id"] as string | undefined)?.trim();
+  req.log.info(
+    sanitizeForLogRecord({
+      demo: "hotel-mvp-session",
+      actorIdPresent: Boolean(actorId),
+    }),
+  );
+  return getHotelMvpDemoSession();
+});
 
 app.setErrorHandler((err: unknown, req, reply) => {
   if (err instanceof BusinessRuleError) {
