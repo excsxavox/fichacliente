@@ -1,7 +1,11 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { loadEnv } from "./config/env.js";
-import { getHotelStateMatrixPayload } from "./domain/hotel/index.js";
+import {
+  getHotelBusinessRulesContract,
+  getHotelStateMatrixPayload,
+} from "./domain/hotel/index.js";
+import { BusinessRuleError } from "./errors/business-rule-error.js";
 import { sanitizeForLogRecord } from "./security/log-sanitize.js";
 
 const env = loadEnv();
@@ -40,7 +44,26 @@ app.get("/v1/meta/stack", async () => ({
 /** Matriz de estados hotel MVP: reserva y habitación (transiciones permitidas/prohibidas). */
 app.get("/v1/hotel/state-matrix", async () => getHotelStateMatrixPayload());
 
+/** Contrato de reglas MVP: cancelación, no-show, cambio de habitación y códigos 409. */
+app.get("/v1/meta/hotel-business-rules", async () => getHotelBusinessRulesContract());
+
 app.setErrorHandler((err: unknown, req, reply) => {
+  if (err instanceof BusinessRuleError) {
+    req.log.warn(
+      sanitizeForLogRecord({
+        businessCode: err.code,
+        path: req.url,
+      }),
+    );
+    void reply.status(409).send({
+      error: {
+        code: err.code,
+        message: err.message,
+      },
+    });
+    return;
+  }
+
   const e = err instanceof Error ? err : new Error(String(err));
   req.log.error(
     sanitizeForLogRecord({

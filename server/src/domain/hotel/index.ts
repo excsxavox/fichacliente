@@ -14,3 +14,11 @@ export {
   assertValidReservationTransition,
 } from "./reservation-state.js";
 export { getHotelStateMatrixPayload } from "./state-matrix-meta.js";
+export {
+  BusinessErrorCode,
+  evaluateCancellation,
+  evaluateNoShow,
+  evaluateRoomChangeAllowed,
+  getHotelBusinessRulesContract,
+} from "./business-rules.js";
+export type { RuleResult } from "./business-rules.js";
